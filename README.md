@@ -17,6 +17,5 @@
 
 **ссылка на gh-pages:**
 
-https://github.com/AndreyBaranovY/mesto
-
+https://andreybaranovy.github.io/mesto/
 Спасибо!
