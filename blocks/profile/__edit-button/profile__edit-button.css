@@ -5,6 +5,8 @@
   height: 15px;
   padding: 12px;
   box-sizing: border-box;
+  background-color: transparent;
+  border: 1px solid white;
   background-size: 48%;
   background-position: center;
   background-image: url(../../../images/edit.svg);
@@ -13,6 +15,7 @@
 
 .profile__edit-button:hover {
   cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, .6);
   background-image: url(../../../images/edit-grey.svg);
   transition: .3s;
 }

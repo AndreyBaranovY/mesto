@@ -22,52 +22,52 @@
             <h1 class="profile__name">Жак-Ив Кусто</h1>
             <p class="profile__job">Исследователь океана</p>
           </div>
-          <button class="btn profile__edit-button"> </button>
+          <button type="button" class="profile__edit-button"> </button>
         </div>
-        <button class="btn profile__add-button"> </button>
+        <button type="button" class="profile__add-button"> </button>
       </section>
 
       <section class="cards">
         <div class="card">
-          <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="card__image">
+          <img src="./images/karachaevsk.jpg" alt="фото города Карачаевск" class="card__image">
           <div class="card__description">
-            <h3 class="card__name">Карачаевск</h3>
-            <img src="./images/like-item.svg" alt="сердечко" class="card__like-icon">
+            <p class="card__name">Карачаевск</p>
+            <button type="button" class="card__like-button"><img src="./images/like-item.svg" alt="сердечко" class="card__like-icon"></button>
           </div>
         </div>
         <div class="card">
-          <img src="./images/elbrus.jpg" alt="Гора Эльбрус" class="card__image">
+          <img src="./images/elbrus.jpg" alt="фото гор Эльбрус" class="card__image">
           <div class="card__description">
-            <h3 class="card__name">Гора Эльбрус</h3>
-            <img src="./images/like-item.svg" alt="сердечко" class="card__like-icon">
+            <p class="card__name">Гора Эльбрус</p>
+            <button type="button" class="card__like-button"><img src="./images/like-item.svg" alt="сердечко" class="card__like-icon"></button>
           </div>
         </div>
         <div class="card">
-          <img src="./images/dombai.jpg" alt="Домбай" class="card__image">
+          <img src="./images/dombai.jpg" alt="фото вешины горы Домбай" class="card__image">
           <div class="card__description">
-            <h3 class="card__name">Домбай</h3>
-            <img src="./images/like-item.svg" alt="сердечко" class="card__like-icon">
+            <p  class="card__name">Домбай</p>
+            <button type="button" class="card__like-button"><img src="./images/like-item.svg" alt="сердечко" class="card__like-icon"></button>
           </div>
         </div>
         <div class="card">
-          <img src="./images/elbrus.jpg" alt="" class="card__image">
+          <img src="./images/elbrus.jpg" alt="фото гор Эльбрус" class="card__image">
           <div class="card__description">
-            <h3 class="card__name">Гора Эльбрус</h3>
-            <img src="./images/like-item.svg" alt="сердечко" class="card__like-icon">
+            <p  class="card__name">Гора Эльбрус</p>
+            <button type="button" class="card__like-button"><img src="./images/like-item.svg" alt="сердечко" class="card__like-icon"></button>
           </div>
         </div>
         <div class="card">
-          <img src="./images/dombai.jpg" alt="" class="card__image">
+          <img src="./images/dombai.jpg" alt="фото вешины горы Домбай" class="card__image">
           <div class="card__description">
-            <h3 class="card__name">Домбай</h3>
-            <img src="./images/like-item.svg" alt="сердечко" class="card__like-icon">
+            <p  class="card__name">Домбай</p>
+            <button type="button" class="card__like-button"><img src="./images/like-item.svg" alt="сердечко" class="card__like-icon"></button>
           </div>
         </div>
         <div class="card">
-          <img src="./images/karachaevsk.jpg" alt="" class="card__image">
+          <img src="./images/karachaevsk.jpg" alt="фото города Карачаевск Черкеск" class="card__image">
           <div class="card__description">
-            <h3 class="card__name">Карачаево-Черкеск</h3>
-            <img src="./images/like-item.svg" alt="сердечко" class="card__like-icon">
+            <p  class="card__name">Карачаево-Черкеск</p>
+            <button type="button" class="card__like-button"><img src="./images/like-item.svg" alt="сердечко" class="card__like-icon"></button>
           </div>
         </div>
       </section>
@@ -78,12 +78,12 @@
   </div>
   <section class="popup">
     <div class="popup__container">
-      <button class="popup__close-btn" ></button>
+      <button type="button" class="popup__close-btn" ></button>
       <h3 class="popup__title"> Редактировать профиль </h3>
-      <form class="popup__form">
-        <input type="text" class="popup__input popup__input_type_name" >
-        <input type="text" class="popup__input popup__input_type_job">
-        <button  type="submit" class="btn popup__button">Сохранить</button>
+      <form class="popup__form" name="form">
+        <input type="text" class="popup__input popup__input_type_name" name="userName">
+        <input type="text" class="popup__input popup__input_type_job" name="userJob">
+        <button  type="submit" class="popup__button">Сохранить</button>
       </form>
     </div>
   </section>

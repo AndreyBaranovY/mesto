@@ -3,15 +3,22 @@
   height: 50px;
   box-sizing: border-box;
   padding: 14px 64px;
+  background-color: transparent;
   background-size: 16%;
   background-position: center;
   background-image: url(../../../images/plus.svg);
   background-repeat: no-repeat;
   margin-top: 40px;
+  border: 2px solid white;
+  border-radius: 2px;
+  box-shadow: none;
+
+
 }
 
 .profile__add-button:hover {
   cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, .6);
   background-image: url(../../../images/plus-grey.svg);
   transition: .3s;
 }
