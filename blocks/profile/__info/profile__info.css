@@ -4,9 +4,11 @@
   max-width: 336px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 760px) {
   .profile__info {
     flex-direction: column;
     position: relative;
+    margin-right: 0px;
   }
 }
+

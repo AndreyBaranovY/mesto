@@ -7,23 +7,21 @@ let nameInput = document.querySelector('.popup__input_type_name');
 let jobInput = document.querySelector('.popup__input_type_job');
 let formElement = document.querySelector('.popup__form');
 const popup = document.querySelector('.popup');
-let userName = "ggg ";
-let userJob = " ";
 
-const togglePopup = function () { // октрывает попап, копирует данные из инпутов и закрывает попап
+
+
+function togglePopup () { // октрывает попап, копирует данные из инпутов если попап закрыт
+  if(!popup.hasAttribute('popup_opened')) {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
+  }
   popup.classList.toggle('popup_opened');
 }
 
 function formSubmitHandler (evt) {  // вносит изменения данных в профиль пользователя
   evt.preventDefault();
-    nameInput = document.querySelector('.popup__input_type_name');
-    jobInput = document.querySelector('.popup__input_type_job');
-      userName = nameInput.value;
-      userJob = jobInput.value;
-    profileName.textContent = userName;
-    profileJob.textContent = userJob;
+    profileName.textContent = nameInput.value;
+    profileJob.textContent = jobInput.value;
   togglePopup();
 }
 
