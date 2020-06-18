@@ -10,8 +10,8 @@ const popup = document.querySelector('.popup');
 
 
 
-function togglePopup () { // октрывает попап и копирует данные из инпутов если попап закрыт!!!
-  if(!popup.hasAttribute('popup_opened')) {
+function togglePopup () { // октрывает попап и копирует данные из инпутов если попап закрыт (смотрим класс а не атрибут)!!!
+  if(!popup.classList.contains('popup_opened')) {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   }
