@@ -19,3 +19,11 @@
   background-image: url(../../../images/close_grey.svg);
   transition: .3s;
 }
+
+
+@media screen and (max-width: 350px) {
+  .popup__close-btn {
+    background-size: 100%;
+
+  }
+}

@@ -1,0 +1,33 @@
+.popup__photo-container {
+  max-width: 75vh;
+  max-height: 75vh;
+  box-sizing: border-box;
+  background-color:transparent;
+  position: absolute;
+  top:100px;
+  left: center;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+
+@media screen and (max-width:940px) {
+  .popup__photo-container {
+    margin: 0 40px;
+    position: absolute;
+    top:135px;
+    left: center;
+  }
+}
+
+
+@media screen and (max-width:540px) {
+  .popup__photo-container {
+    max-width:240px;
+    min-height: 258px;
+    margin: 0 40px;
+    position: absolute;
+    top:135px;
+    left: center;
+  }
+}

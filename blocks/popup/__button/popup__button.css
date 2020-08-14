@@ -13,3 +13,13 @@
   transition: .3s;
   cursor: pointer;
 }
+
+@media screen and (max-width: 350px) {
+  .popup__button {
+    margin-top: 36px;
+    width: 200px;
+    min-height: 40px;
+   font-size: 14px;
+
+  }
+}

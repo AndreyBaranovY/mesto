@@ -5,12 +5,22 @@
   padding: 34px 36px;
   background-color: white;
   border-radius: 10px;
-  position: relative;
+  position: absolute;
+  top: 170px;
+  left: center;
 }
 
 @media screen and (max-width: 600px) {
   .popup__container {
     width: calc(100% - 50px);
+   margin-top: 200px;
   }
 }
 
+@media screen and (max-width: 350px) {
+  .popup__container {
+    width: calc(100% - 70px);
+    margin-top: 0;
+   max-height: 258px;
+  }
+}
