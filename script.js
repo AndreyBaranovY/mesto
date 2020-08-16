@@ -45,33 +45,55 @@ const closeAddButton = document.querySelector('.popup__add-btn');
 const photoPopup = document.querySelector('.popup-photo');
 const closePhotoButton = document.querySelector('.popup__photo-btn');
 
-function addCard (cardName, cardLink) {
-    const cardTemplate = document.querySelector('#card-template').content;
-    const cardElement = cardTemplate.cloneNode(true);
-      cardElement.querySelector('.card__name').textContent = cardName;
-      cardElement.querySelector('.card__image').src = cardLink;
-      cardElement.querySelector('.card__like-button').addEventListener('click', function (evt) { // слушатель на переключение лайков
-        evt.target.classList.toggle('card__like-button_active');
-      });
-      cardElement.querySelector('.card__trash-btn').addEventListener('click', function (evt) { // слушатель на удаление карточки
-        const clickTrash = evt.target;
-        const cardToDelete = clickTrash.closest('.card');
-          cardToDelete.remove();
-      });
-      cardElement.querySelector('.card__image').addEventListener('click', function (evt) { // слушатель на открытие фото попапа
-        const clickedCardImg = evt.target;
-        const clickedCard = clickedCardImg.parentElement;
-          if (clickedCardImg) {
-             const photoImg = document.querySelector('.popup__photo');
-             const photoTitle = document.querySelector('.popup__photo-title');
-             const clickedCardTitle = clickedCard.querySelector('.card__name');
-               photoImg.src = clickedCardImg.src;
-               photoTitle.textContent = clickedCardTitle.textContent;
-             openPopup(photoPopup);
-          }
-      });
-    cards.prepend(cardElement);
+
+function likeAction (evt) {                   // ф-я  переключения лайков for createCard
+  evt.target.classList.toggle('card__like-button_active');
+}
+
+function deleteCardAction (evt) {             // ф-я удаления карточки for createCard
+  const clickTrash = evt.target;
+  const cardToDelete = clickTrash.closest('.card');
+   cardToDelete.remove();
+}
+
+function seeBigFotoAction (evt) {            //ф-я открытия фото попапа for createCard
+  const clickedCardImg = evt.target;
+  const clickedCard = clickedCardImg.parentElement;
+    if (clickedCardImg) {
+      const photoImg = document.querySelector('.popup__photo');
+      const photoTitle = document.querySelector('.popup__photo-title');
+      const clickedCardTitle = clickedCard.querySelector('.card__name');
+       photoImg.src = clickedCardImg.src;
+       photoTitle.textContent = clickedCardTitle.textContent;
+       openPopup(photoPopup);
+    }
+}
+
+  function createCard (cardName, cardLink) {  // 1)создаёт элемент карточки из шаблона 2)добавляет обработчики событий на дочерние эл-ты входящие в состав карточки
+   const cardTemplate = document.querySelector('#card-template').content;
+   const cardElement = cardTemplate.cloneNode(true);
+    cardElement.querySelector('.card__name').textContent = cardName;
+    cardElement.querySelector('.card__image').src = cardLink;
+
+    cardElement.querySelector('.card__like-button').addEventListener('click',likeAction);       // слушатель на переключение лайков
+    cardElement.querySelector('.card__trash-btn').addEventListener('click', deleteCardAction);  // слушатель на удаление карточки
+    cardElement.querySelector('.card__image').addEventListener('click',seeBigFotoAction );      // слушатель на открытие фото попапа
+   return cardElement;
   }
+
+  function addCard (cardName, cardLink) {   // добавляет созданный элемент из шаблона в начало списка
+    const newCard = createCard(cardName, cardLink);
+      cards.prepend(newCard);
+  }
+
+  function renderCards () {                // рендерит каточки на экран
+    initialCards.forEach(cardItem => {
+      addCard(cardItem.name, cardItem.link);
+    });
+  }
+
+
+
 
   function formSubmitHandler (evt) {  // заносит изменения данных в профиль пользователя
     evt.preventDefault();
@@ -119,22 +141,29 @@ closePhotoButton.addEventListener('click', function () {  // на закрыти
 
 formElementProfile.addEventListener('submit', formSubmitHandler);  // сабмит на изменения в профайл пользвателя
 formElementCard.addEventListener('submit', userAddCards);     // сабмит надобавление новой карты пользователя
-initialCards.forEach(card => {                                // добавление готовых карточек из массива
-  addCard(card.name, card.link);
-});
 
-/*
+//initialCards.forEach(card => {
+//  addCard(card.name, card.link);
+// });
 
-https://unsplash.com/photos/KWZ-rg9o76A
+renderCards ();   // добавление готовых карточек из массива
 
-https://unsplash.com/photos/8F59AdH6WKk
 
-https://unsplash.com/photos/ZEzwmB7tTMo
 
-https://unsplash.com/photos/yYoKQPYY3k8
 
-https://unsplash.com/photos/G_WdzcrvTNY
-*/
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*function togglePopup (popupElement) { // октрывает и закрывает попапы
   if(!popupElement.classList.contains('popup_opened')) {
   }

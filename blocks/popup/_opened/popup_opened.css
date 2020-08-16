@@ -1,5 +1,4 @@
 .popup_opened {
-  display: flex;
-  opacity: 1;
+  opacity: 1;    /* display: flex; убрать для работы плавности переходов */
   visibility: visible;
 }

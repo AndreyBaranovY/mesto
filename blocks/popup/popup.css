@@ -18,10 +18,8 @@
   display: flex;
    justify-content: center;
    align-items: center;
-   display: none;
-  visibility: hidden;
+  visibility: hidden;  /* display: none !!! убрать для работы плавности переходов */
   opacity: 0;
-  transition: visibility 0s, opacity 0.5s linear;
+  transition: visibility 1s, opacity 0.5s linear;
 }
-
 
