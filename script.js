@@ -28,16 +28,16 @@ const initialCards = [
 const cards = document.querySelector('.cards');
 const editButton = document.querySelector('.profile__edit-button');
 const editProfilePopup = document.querySelector('.popup-profile');
-let formElementProfile = document.querySelector('.popup__form-profile');
-let profileName = document.querySelector('.profile__name');
-let profileJob = document.querySelector('.profile__job');
+const formElementProfile = document.querySelector('.popup__form-profile');
+const profileName = document.querySelector('.profile__name');
+const profileJob = document.querySelector('.profile__job');
 let nameInput = formElementProfile.querySelector('.popup__input_type_name');
 let jobInput = formElementProfile.querySelector('.popup__input_type_job');
 const closeEditButton = editProfilePopup.querySelector('.popup__edit-btn');
 
 const addButton = document.querySelector('.profile__add-button');
 const addCardPopup = document.querySelector('.popup-card');
-let formElementCard = document.querySelector('.popup__form-card');
+const formElementCard = document.querySelector('.popup__form-card');
 let cardNameInput = formElementCard.querySelector('.popup__input_type_card-name');
 let cardLinkInput = formElementCard.querySelector('.popup__input_type_link');
 const closeAddButton = document.querySelector('.popup__add-btn');
@@ -108,8 +108,6 @@ function seeBigFotoAction (evt) {            //ф-я открытия фото �
     const cardLink = cardLinkInput.value;
     addCard(cardName, cardLink);
     closePopup(addCardPopup);
-    cardNameInput.value = '';
-    cardLinkInput.value = '';
 }
 
 function openPopup (popupElement) {         // открывает попапы
@@ -131,6 +129,7 @@ closeEditButton.addEventListener('click', function () {  // на закрыти�
 
  addButton.addEventListener('click', function () {  // на октрытие окна добавления карточки
   openPopup(addCardPopup);
+  formElementCard.reset();  //очищаем ВСЕ поля карты
 });
 closeAddButton.addEventListener('click', function () {  // на закрытие окна добавления карточки
   closePopup(addCardPopup);
@@ -141,10 +140,6 @@ closePhotoButton.addEventListener('click', function () {  // на закрыти
 
 formElementProfile.addEventListener('submit', formSubmitHandler);  // сабмит на изменения в профайл пользвателя
 formElementCard.addEventListener('submit', userAddCards);     // сабмит надобавление новой карты пользователя
-
-//initialCards.forEach(card => {
-//  addCard(card.name, card.link);
-// });
 
 renderCards ();   // добавление готовых карточек из массива
 
