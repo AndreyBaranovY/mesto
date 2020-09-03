@@ -1,38 +1,13 @@
-const initialCards = [
-  {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+
 const overlay = document.querySelector('.page');
-const cards = document.querySelector('.cards');
+const cardsSection = document.querySelector('.cards-section');
 const editButton = document.querySelector('.profile__edit-button');
 const editProfilePopup = document.querySelector('.popup-profile');
 const formElementProfile = document.querySelector('.popup__form-profile');
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__job');
-const nameInput = formElementProfile.querySelector('.popup__input_type_name');
-const jobInput = formElementProfile.querySelector('.popup__input_type_job');
+const profileNameInput = formElementProfile.querySelector('.popup__input_type_name');
+const profileJobInput = formElementProfile.querySelector('.popup__input_type_job');
 const closeEditButton = editProfilePopup.querySelector('.popup__edit-btn');
 
 const addButton = document.querySelector('.profile__add-button');
@@ -63,6 +38,7 @@ function seeBigPicAction (evt) {            //ф-я открытия фото п
       const photoTitle = document.querySelector('.popup__photo-title');
       const clickedCardTitle = clickedCard.querySelector('.card__name');
        photoImg.src = clickedCardImg.src;
+       photoImg.alt = " Изображение " + clickedCardTitle.textContent;
        photoTitle.textContent = clickedCardTitle.textContent;
        openPopup(photoPopup);
     }
@@ -71,31 +47,26 @@ function seeBigPicAction (evt) {            //ф-я открытия фото п
   function createCard (cardName, cardLink) {  // 1)создаёт элемент карточки из шаблона 2)добавляет обработчики событий на дочерние эл-ты входящие в состав карточки
    const cardTemplate = document.querySelector('#card-template').content;
    const cardElement = cardTemplate.cloneNode(true);
+   const cardElementImage = cardElement.querySelector('.card__image');
     cardElement.querySelector('.card__name').textContent = cardName;
-    cardElement.querySelector('.card__image').src = cardLink;
-
+    cardElementImage.src = cardLink;
+    cardElementImage.alt = " Изображение " + cardName;
+    cardElementImage.addEventListener('click',seeBigPicAction );                                // слушатель на открытие фото попапа
     cardElement.querySelector('.card__like-button').addEventListener('click',likeAction);       // слушатель на переключение лайков
     cardElement.querySelector('.card__trash-btn').addEventListener('click', deleteCardAction);  // слушатель на удаление карточки
-    cardElement.querySelector('.card__image').addEventListener('click',seeBigPicAction );      // слушатель на открытие фото попапа
-   return cardElement;
+    return cardElement;
   }
 
   function addCard (cardName, cardLink) {   // добавляет созданный элемент из шаблона в начало списка
     const newCard = createCard(cardName, cardLink);
-      cards.prepend(newCard);
+      cardsSection.prepend(newCard);
   }
-
-  function renderCards () {                // рендерит каточки на экран
-    initialCards.forEach(cardItem => {
-      addCard(cardItem.name, cardItem.link);
-    });
-  }
-
 
   function formSubmitHandler (evt) {  // заносит изменения данных в профиль пользователя
     evt.preventDefault();
-      profileName.textContent = nameInput.value;
-      profileJob.textContent = jobInput.value;
+      profileName.textContent = profileNameInput.value;
+      profileJob.textContent = profileJobInput.value;
+
     closePopup(editProfilePopup);
   }
 
@@ -105,12 +76,15 @@ function seeBigPicAction (evt) {            //ф-я открытия фото п
     const cardLink = cardLinkInput.value;
     addCard(cardName, cardLink);
     closePopup(addCardPopup);
+
 }
 
 function openPopup (popupElement) {         // открывает попапы
   popupElement.classList.add('popup_opened');
+  overlay.addEventListener('keydown', keyHandler );  // добавляем слушатель на закрытие любого попапа кнопкой Esc
 }
 function closePopup (popupElement) {        // закрывает попапы
+  overlay.removeEventListener('keyup', keyHandler);  // снимаем слушателя с кнопки Esc
   popupElement.classList.remove('popup_opened');
 }
 
@@ -124,9 +98,13 @@ function keyHandler (evt) {        // реализует закрытие поп
                                                  // ОБРАБОТЧИКИ СОБЫТИЙ
 editButton.addEventListener('click', function () {  // на октрытие окна окна редактирования профайла
   openPopup(editProfilePopup);
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileJob.textContent;
+  profileNameInput.value = profileName.textContent;
+  profileJobInput.value = profileJob.textContent;
+    const inputList = Array.from(formElement.querySelectorAll(formObj.inputSelector));  // валидируем введённые данные в рекдакторе
+    const buttonElement = formElement.querySelector(formObj.submitButtonSelector);
+    toggleButtonState(inputList, buttonElement, formObj);
 });
+
 closeEditButton.addEventListener('click', function () {  // на закрытие окна редактирования профайла
   closePopup(editProfilePopup);
 });
@@ -134,6 +112,10 @@ closeEditButton.addEventListener('click', function () {  // на закрыти�
  addButton.addEventListener('click', function () {  // на октрытие окна добавления карточки
   openPopup(addCardPopup);
   formElementCard.reset();  //очищаем ВСЕ поля карты
+  const buttonElement = formElementCard.querySelector('.popup__button'); // валидируем кнопку и данные при добавлении карты
+  buttonElement.classList.add(formObj.inactiveButtonClass);
+  buttonElement.setAttribute('disabled', '');
+
 });
 closeAddButton.addEventListener('click', function () {  // на закрытие окна добавления карточки
   closePopup(addCardPopup);
@@ -143,41 +125,23 @@ closePhotoButton.addEventListener('click', function () {  // на закрыти
 });
 
 overlay.addEventListener('click', function (evt) {  // на закрытие любого попапа кликом
-  if(event.target.classList.contains('popup')) {
-    closePopup(event.target);
+  if(evt.target.classList.contains('popup')) {
+    closePopup(evt.target);
   }
 });
 
-overlay.addEventListener('keydown', keyHandler );  // на закрытие любого попапа кнопкой Esc
-overlay.removeEventListener('keyup', keyHandler);  // снимаем слушателя с кнопки Esc
+formElementProfile.addEventListener('submit', formSubmitHandler);  // сабмит на изменения в профайле пользвателя
+formElementCard.addEventListener('submit', userAddCards);     // сабмит на добавление новой карты от пользователя
 
-
-
-formElementProfile.addEventListener('submit', formSubmitHandler);  // сабмит на изменения в профайл пользвателя
-formElementCard.addEventListener('submit', userAddCards);     // сабмит надобавление новой карты пользователя
-
-renderCards ();   // добавление готовых карточек из массива
-
-
-
-
-
-
-
-
-/*function togglePopup (popupElement) { // октрывает и закрывает попапы
-  if(!popupElement.classList.contains('popup_opened')) {
-  }
-  popupElement.classList.toggle('popup_opened');
-}
-
-
-
-
-overlay.addEventListener('keydown', function (evt) {  // на закрытие любого попапа кнопкой Esc
-  if(evt.key === 'Escape') {
-    const popupElement = evt.currentTarget.querySelector('.popup_opened');
-    closePopup(popupElement);
-  }
+initialCards.forEach(cardItem => {       // метод forEach рендерит карточки на экран ( не владываем в ф-ю: срабатывает сразу при загрузке страницы без доп вызовов ф-и)
+  addCard(cardItem.name, cardItem.link);
 });
-*/
+
+
+
+
+
+
+
+
+

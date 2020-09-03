@@ -1,4 +1,4 @@
-.cards {
+.cards-section {
   width: 100%;   /* для коректной работы с Firefox */
   box-sizing: border-box;
   display: grid;
@@ -10,7 +10,7 @@
 }
 
 @media screen and (max-width:600px) {
-  .cards  {
+  .cards-section  {
     padding: 0 19px 0;
   }
 }

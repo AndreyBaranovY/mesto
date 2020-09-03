@@ -1,25 +1,25 @@
 const formElement = document.querySelector('.popup__form');
 const formObj = {                            // параметры ф-и валидации
-formSelector: '.popup__form',
-inputSelector: '.popup__input',
-submitButtonSelector: '.popup__button',
-inactiveButtonClass: 'popup__button_disabled',
-inputErrorClass: 'popup__input_type_error',
-errorClass: 'popup__error_visible'
+  formSelector: `.popup__form`,
+  inputSelector: `.popup__input`,
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
 };
 
 
 const showInputError = (formElement, inputElement, errorMessage,formObj) => { // показывает ошибкy
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.add(formObj.inputErrorClass);
-  inputElement.classList.add(formObj.errorClass);
+  errorElement.classList.add(formObj.errorClass);
   errorElement.textContent = errorMessage;
 };
 
 const hideInputError = (formElement, inputElement, formObj) => {      // скрывает ошибкy
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.remove(formObj.inputErrorClass);
-  inputElement.classList.remove(formObj.errorClass);
+  errorElement.classList.remove(formObj.errorClass);
   errorElement.textContent = '';
 };
 
@@ -45,10 +45,11 @@ const setEventListeners = (formElement, formObj) =>{
 
 const enableValidation = (formObj) => {                // запускает валидацию форм
   const formList = Array.from(document.querySelectorAll(formObj.formSelector));
-  formList.forEach((formElement) => {
-    formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
+    formList.forEach((formElement) => {
+      formElement.addEventListener('submit', (evt) => {
+        evt.preventDefault();
+  });
+
     setEventListeners(formElement, formObj);
   });
 };
@@ -62,10 +63,10 @@ const hasInvalidInput = (inputList) => {     // отвечает за запол
 const toggleButtonState = (inputList, buttonElement, formObj) => { // отвечает за сотояние кнопки сабмита
   if (hasInvalidInput(inputList)){
     buttonElement.classList.add(formObj.inactiveButtonClass);
-    buttonElement.classList.add('disabled');
+    buttonElement.setAttribute('disabled', '');
   }else{
     buttonElement.classList.remove(formObj.inactiveButtonClass);
-    buttonElement.classList.remove('disabled');
+    buttonElement.removeAttribute('disabled', '');
   }
 };
 

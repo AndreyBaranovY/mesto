@@ -27,49 +27,8 @@
         <button type="button" class="profile__add-button"> </button>
       </section>
 
-      <section class="cards"> <!--
-        <div class="card">
-          <img src="./images/karachaevsk.jpg" alt="фото города Карачаевск" class="card__image">
-          <div class="card__description">
-            <p class="card__name">Карачаевск</p>
-            <button type="button" class="card__like-button"><img src="./images/like-item.svg" alt="сердечко" class="card__like-icon"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img src="./images/elbrus.jpg" alt="фото гор Эльбрус" class="card__image">
-          <div class="card__description">
-            <p class="card__name">Гора Эльбрус</p>
-            <button type="button" class="card__like-button"><img src="./images/like-item.svg" alt="сердечко" class="card__like-icon"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img src="./images/dombai.jpg" alt="фото вешины горы Домбай" class="card__image">
-          <div class="card__description">
-            <p  class="card__name">Домбай</p>
-            <button type="button" class="card__like-button"><img src="./images/like-item.svg" alt="сердечко" class="card__like-icon"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img src="./images/elbrus.jpg" alt="фото гор Эльбрус" class="card__image">
-          <div class="card__description">
-            <p  class="card__name">Гора Эльбрус</p>
-            <button type="button" class="card__like-button"><img src="./images/like-item.svg" alt="сердечко" class="card__like-icon"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img src="./images/dombai.jpg" alt="фото вешины горы Домбай" class="card__image">
-          <div class="card__description">
-            <p  class="card__name">Домбай</p>
-            <button type="button" class="card__like-button"><img src="./images/like-item.svg" alt="сердечко" class="card__like-icon"></button>
-          </div>
-        </div>
-        <div class="card">
-          <img src="./images/karachaevsk.jpg" alt="фото города Карачаевск Черкеск" class="card__image">
-          <div class="card__description">
-            <p  class="card__name">Карачаево-Черкеск</p>
-            <button type="button" class="card__like-button"><img src="./images/like-item.svg" alt="сердечко" class="card__like-icon"></button>
-          </div>
-        </div>-->
+      <section class="cards-section">
+
       </section>
     </main>
     <footer class="footer">
@@ -83,10 +42,10 @@
       <h3 class="popup__title"> Редактировать профиль </h3>
       <form class="popup__form popup__form-profile" name="form-profile" novalidate>
         <input id ="name-input" type="text" class="popup__input popup__input_type_name" name="userName" placeholder= "Имя" required minlength="2" maxlength="40" required >
-        <span id = "name-input-error" class="popup__error_visible">Вы пропустили это поле</span>
+        <span id = "name-input-error" class = " " >Вы пропустили это поле</span>
         <input id = "job-input" type="text" class="popup__input popup__input_type_job" name="userJob" placeholder= "О себе" required minlength="2" maxlength="200" required>
-        <span id = "job-input-error" class="popup__error_visible">Вы пропустили это поле</span>
-        <button  type="submit" class="popup__button">Сохранить</button>
+        <span id = "job-input-error" class = " " >Вы пропустили это поле</span>
+        <button  type="submit" class="popup__button " disabled>Сохранить</button>
       </form>
     </div>
   </div>
@@ -97,10 +56,10 @@
       <h3 class="popup__title"> Новое место </h3>
       <form class="popup__form popup__form-card" name="form-place" novalidate>
         <input id = "place-input" type="text" class="popup__input popup__input_type_card-name" name="cardName" placeholder="Название" required  minlength="1" maxlength="30" >
-        <span id = "place-input-error" class="popup__error_visible">Вы пропустили это поле.</span>
-        <input id = "url-input" type="url" class="popup__input popup__input_type_link" name="cardLink" placeholder="Не ссылка" required >
-        <span id = "url-input-error" class="popup__error_visible">Введите адрес сайта.</span>
-        <button  type="submit" class="popup__button" >Создать</button>
+        <span id = "place-input-error" class = " " >Вы пропустили это поле.</span>
+        <input id = "url-input" type="url" class="popup__input popup__input_type_link" name="cardLink" placeholder="Введите адрес сайта." required >
+        <span id = "url-input-error" class = " " >Не ссылка</span>
+        <button  type="submit" class="popup__button " disabled>Создать</button>
       </form>
     </div>
   </div>
@@ -109,7 +68,7 @@
     <div class="popup__photo-container">
       <button type="button" class="popup__close-btn popup__photo-btn"></button>
       <h3 class="popup__photo-title"></h3>
-        <img src="" alt="фото места" class="popup__photo">
+        <img src="" alt="" class="popup__photo">
     </div>
   </div>
 
@@ -125,6 +84,9 @@
   </template>
 
 </body>
-<script type="text/javascript" src="./script.js"></script>
+<script type="text/javascript" src="./initial-cards.js"></script>
 <script type="text/javascript" src="./validate.js"></script>
+<script type="text/javascript" src="./script.js"></script>
+
+
 </html>
