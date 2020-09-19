@@ -1,3 +1,6 @@
+
+
+
 import Card from './Card.js'
 import FormValidator from './FormValidator.js'
 
@@ -109,6 +112,23 @@ editFormProfile.enableValidation();
 
 
 
+/*
+function seeBigPicAction (evt) {          //ф-я открытия фото попапа
+  const clickedCardImg = evt.target;
+  const clickedCard = clickedCardImg.parentElement;
+  console.log(clickedCardImg);
+    if (clickedCardImg) {
+      const photoImg = document.querySelector('.popup__photo');
+      const photoTitle = document.querySelector('.popup__photo-title');
+      const clickedCardTitle = clickedCard.querySelector('.card__name');
+       photoImg.src = clickedCardImg.src;
+       photoImg.alt = " Изображение " + clickedCardTitle.textContent;
+       photoTitle.textContent = clickedCardTitle.textContent;
+         debugger;
+       openPopup(photoPopup);
+    }
+  }
+*/
 
 
 
