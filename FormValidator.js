@@ -54,15 +54,12 @@ export default class FormValidator {
     });
   }
 
-  enableValidation()  {                // запускает валидацию форм
-    const formList = Array.from(document.querySelectorAll(this._formObj.formSelector));
-      formList.forEach((formElement) => {
-        formElement.addEventListener('submit', (evt) => {
-          evt.preventDefault();
-        });
-      this._setEventListeners();
-    })
+  enableValidation()  {
+    this._form = document.querySelector(this._formObj.formSelector);
+    this._form.addEventListener("submit", function (evt) {
+        evt.preventDefault();
+    });
+    this._setEventListeners();
   }
+
 }
-
-
