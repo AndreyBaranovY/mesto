@@ -39,31 +39,11 @@ export default class Card {
     const cardToDelete = evt.target.closest('.card');
      cardToDelete.remove();
   }
-  _seeBigPicAction (evt) {          //ф-я открытия фото
-    const clickedCardImg = evt.target;
-    const clickedCard = clickedCardImg.parentElement;
-    if (clickedCardImg) {
-
-    const clickedCardTitle = clickedCard.querySelector('.card__name');
-    photoImg.src = clickedCardImg.src;
-    photoImg.alt =`Изображение ${clickedCardTitle}`;
-    photoTitle.textContent = clickedCardTitle.textContent;
-
-    openPopup(photoPopup);
-    }
-}
-
-  _setEventListeners() {
-    this._cardImage.addEventListener('click', this._seeBigPicAction);  // слушатель на открытие фото попапа
-    this._element.querySelector('.card__like-button').addEventListener('click', this._likeAction);  // слушатель на переключение лайков
-    this._element.querySelector('.card__trash-btn').addEventListener('click', this._deleteCardAction);  // слушатель на удаление карточки
-  }
 
   generateCard() {
     this._element = this._getTemplate();
     this._cardImage =  this._element.querySelector('.card__image');
     this._cardName =  this._element.querySelector('.card__name');
-
     this._setEventListeners();
     this._cardImage.src = this._link;
     this._cardName.textContent = this._name;
@@ -71,4 +51,42 @@ export default class Card {
 
     return this._element;
   }
+
+  _seeBigPicAction (evt) {          //ф-я открытия фото
+    this._clickedCard = evt.target.parentElement;
+    photoImg.src =evt.target.src;
+    photoImg.alt =`Изображение ${this._clickedCard.innerText }`;
+    photoTitle.textContent = this._clickedCard.innerText ;
+    openPopup(photoPopup);
+  }
+
+
+  _setEventListeners() {
+    this._element.querySelector('.card__image').addEventListener('click', this._seeBigPicAction);  // слушатель на открытие фото попапа
+    this._element.querySelector('.card__like-button').addEventListener('click', this._likeAction);  // слушатель на переключение лайков
+    this._element.querySelector('.card__trash-btn').addEventListener('click', this._deleteCardAction);  // слушатель на удаление карточки
+  }
 }
+
+
+
+
+
+
+/*
+  _seeBigPicAction (evt) {          //ф-я открытия фото
+    const clickedCardImg = evt.target;
+
+    if (clickedCardImg) {
+
+    const clickedCardTitle = clickedCard.querySelector('.card__name');
+
+    console.log(this._cardName);
+    photoImg.src = clickedCardImg.src;
+    photoImg.alt =`Изображение ${clickedCardTitle }`;
+    photoTitle.textContent = clickedCardTitle.textContent;
+
+    openPopup(photoPopup);
+    }
+  }
+*/
