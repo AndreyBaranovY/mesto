@@ -19,9 +19,8 @@ import {UserInfo} from '../components/UserInfo.js';
 
 function newCard(obj) {
   const card = new Card(obj, ".card-template", (link, name) => {
-   popupWithImage.open(link, name);
-   popupWithImage.setEventListeners();
-  });
+    popupWithImage.open(link, name);
+    });
   const cardElement = card.generateCard();
   defaultSection.addItem(cardElement);
 }
@@ -48,22 +47,21 @@ const cardPopup = new PopupWithForm(".popup-card", (obj) => {
 const popupWithImage = new PopupWithImage(".popup-photo");
 const editFormProfile = new FormValidator(formObj, formElementProfile); // создаём объекты и запускаем валидацию форм
 const editFormCard = new FormValidator(formObj, formElementCard);
-editFormCard.enableValidation();
-editFormProfile.enableValidation();
-
-
 
 cardPopup.setEventListeners();
 profilePopup.setEventListeners();
 defaultSection.renderItems();
 editButton.addEventListener("click", () => {
       profilePopup.open();
+      editFormProfile.clearInputErrors();
+      editFormProfile.enableValidation();
       profileNameInput.value = userinfo.getUserInfo().userName;
       profileJobInput.value = userinfo.getUserInfo().userJob;
     });
-
 addButton.addEventListener('click', () => {
   cardPopup.open();
+  editFormCard.clearInputErrors();
+  editFormCard.enableValidation();
 });
 
 

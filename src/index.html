@@ -55,9 +55,9 @@
       <button type="button" class="popup__close-btn popup__add-btn" ></button>
       <h3 class="popup__title"> Новое место </h3>
       <form class="popup__form popup__form-card" name="form-place" novalidate>
-        <input id = "place-input" type="text" class="popup__input popup__input_type_card-name" name="cardName" placeholder="Название" required  minlength="1" maxlength="30" >
+        <input id = "place-input" type="text" class="popup__input popup__input_type_card-name" name="name" placeholder="Название" required  minlength="1" maxlength="30" >
         <span id = "place-input-error" class = " " >Вы пропустили это поле.</span>
-        <input id = "url-input" type="url" class="popup__input popup__input_type_link" name="cardLink" placeholder="Введите адрес сайта." required >
+        <input id = "url-input" type="url" class="popup__input popup__input_type_link" name="link" placeholder="Введите адрес сайта." required >
         <span id = "url-input-error" class = " " >Не ссылка</span>
         <button  type="submit" class="popup__button " disabled>Создать</button>
       </form>
@@ -78,7 +78,7 @@
       <button type="button" class="card__trash-btn"></button>
       <div class="card__description">
         <p  class="card__name"></p>
-        <button type="button" class="card__like-button "></button>
+        <button type="button" class="card__like-button"></button>
       </div>
     </div>
   </template>

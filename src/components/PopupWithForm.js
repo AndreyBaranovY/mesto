@@ -5,20 +5,15 @@ export class PopupWithForm extends Popup {
     super(popupSelector);
     this._submit = submit;
     this._form = this._popup.querySelector('.popup__form');
-    this._userName = document.querySelector(".popup__input_type_name");
-    this._userJob = document.querySelector(".popup__input_type_job");
-    this._cardName = document.querySelector(".popup__input_type_card-name");
-    this._cardLink = document.querySelector(".popup__input_type_link");
-
   }
-  _getInputValues() {
-    return {
-      userName: this._userName.value,
-      userJob: this._userJob.value,
-      name: this._cardName.value,
-      link: this._cardLink.value,
-    };
 
+  _getInputValues() {
+    this._inputList = this._popup.querySelectorAll('.popup__input');
+
+    this._formValues = {};
+    this._inputList.forEach(input => this._formValues[input.name] = input.value);
+    console.log(this._formValues);
+    return this._formValues;
   }
 
   setEventListeners() {
@@ -33,5 +28,4 @@ export class PopupWithForm extends Popup {
     super.close();
     this._form.reset();
   }
-
 }

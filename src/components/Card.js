@@ -8,18 +8,10 @@ export class Card {
   }
 
   _getTemplate() {
-    const cardElement = document.querySelector(this._template).content.cloneNode(true);
+    const cardElement = document.querySelector(this._template).content.querySelector('.card').cloneNode(true);
     return cardElement;
   }
 
-  _likeAction (evt) {                   // ф-я  переключения лайков for createCard
-   evt.target.classList.toggle('card__like-button_active');
- }
-
-  _deleteCardAction (evt) {             // ф-я удаления карточки for createCard
-    const cardToDelete = evt.target.closest('.card');
-     cardToDelete.remove();
-  }
 
   generateCard() {
     this._element = this._getTemplate();
@@ -30,16 +22,21 @@ export class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector('.card__image').addEventListener('click', () => {
+    this._element.querySelector('.card__image').addEventListener('click', () => {                     // слушатель на большое фото
       this._handleCardClick(this._link, this._name);
     });
-    this._element.querySelector('.card__like-button').addEventListener('click', this._likeAction);  // слушатель на переключение лайков
-    this._element.querySelector('.card__trash-btn').addEventListener('click', this._deleteCardAction);  // слушатель на удаление карточки
+    this._element.querySelector('.card__like-button').addEventListener('click',  () => { this._likeAction()});  // слушатель на переключение лайков
+    this._element.querySelector('.card__trash-btn').addEventListener('click', () => { this._deleteCard()});  // слушатель на удаление карточки
   }
 
-  _deleteCard() {
-    this._element.remove();
-    this._element = null;
+  _likeAction () {                   // ф-я  переключения лайков
+    this._element.querySelector('.card__like-button').classList.toggle('card__like-button_active');
+ }
 
-  }
+ _deleteCard() {                // ф-я удаления карточки
+  this._element.remove();
+  this._element = null;
+
+}
+
 }
