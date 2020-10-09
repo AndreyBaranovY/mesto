@@ -67,4 +67,9 @@ export class FormValidator {
       this._hideInputError(inputElement);
     });
   }
+
+  validate() {
+    this._toggleButtonState();
+  }
+
 }

@@ -47,6 +47,8 @@ const cardPopup = new PopupWithForm(".popup-card", (obj) => {
 const popupWithImage = new PopupWithImage(".popup-photo");
 const editFormProfile = new FormValidator(formObj, formElementProfile); // создаём объекты и запускаем валидацию форм
 const editFormCard = new FormValidator(formObj, formElementCard);
+editFormProfile.enableValidation();
+editFormCard.enableValidation();
 
 cardPopup.setEventListeners();
 profilePopup.setEventListeners();
@@ -54,14 +56,14 @@ defaultSection.renderItems();
 editButton.addEventListener("click", () => {
       profilePopup.open();
       editFormProfile.clearInputErrors();
-      editFormProfile.enableValidation();
+
       profileNameInput.value = userinfo.getUserInfo().userName;
       profileJobInput.value = userinfo.getUserInfo().userJob;
     });
 addButton.addEventListener('click', () => {
   cardPopup.open();
   editFormCard.clearInputErrors();
-  editFormCard.enableValidation();
+  editFormCard.validate();
 });
 
 
