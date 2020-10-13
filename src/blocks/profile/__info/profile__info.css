@@ -1,4 +1,5 @@
 .profile__info {
+  justify-self: flex-start;
   display: flex;
   align-items: center;
   max-width: 336px;

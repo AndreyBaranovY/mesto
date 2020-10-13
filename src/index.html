@@ -1,40 +1,59 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Курсовая работа 8 Яндекс Практикум">
+  <meta name="description" content="Курсовая работа 9 Яндекс Практикум">
   <meta name="keywords" content="портфолио Андрея Баранова на Яндекс Практикум">
   <meta name="author" content="Баранов Андрей">
   <title>Место</title>
-  <!--<link rel="stylesheet" href="pages/index.css" type="text/css"> -->
 </head>
+
 <body class="page">
   <div class="content">
+
     <header class="header">
       <img class="header__logo" src="./images/logo.svg" alt="логотип надпись Mesto Russia">
     </header>
+
     <main class="main">
       <section class="profile">
+        <div class="profile__avatar">
+          <div class="profile__avatar-overlay"></div>
+        </div>
         <div class="profile__info">
-          <img class="profile__avatar" src="./images/jan.jpg" alt="Жак-Ив Кустро" >
           <div class="profile__description">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <p class="profile__job">Исследователь океана</p>
+            <h1 class="profile__name"></h1>
+            <p class="profile__job"></p>
           </div>
           <button type="button" class="profile__edit-button"> </button>
         </div>
         <button type="button" class="profile__add-button"> </button>
       </section>
-
       <section class="cards-section">
-
       </section>
     </main>
+
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
   </div>
+
+  <template class ="card-template">
+    <div class="card">
+      <img src="#" alt="#" class="card__image">
+      <button type="button" class="card__trash-btn"></button>
+      <div class="card__description">
+        <p  class="card__name"></p>
+      <div class="card__like-container">
+        <div class="card__like-button"></div>
+        <p class="card__counter"></p>
+      </div>
+      </div>
+      </div>
+    </div>
+  </template>
 
   <div class="popup popup-profile">
     <div class="popup__container ">
@@ -72,26 +91,26 @@
     </div>
   </div>
 
-  <template class ="card-template">
-    <div class="card">
-      <img src="#" alt="фото места" class="card__image">
-      <button type="button" class="card__trash-btn"></button>
-      <div class="card__description">
-        <p  class="card__name"></p>
-        <button type="button" class="card__like-button"></button>
-      </div>
+  <div class="popup popup-delete-card">
+    <div class="popup__container popup__container_delete-card">
+      <button type="button" class="popup__close-btn popup__close-btn_delete-card"></button>
+      <form class="popup__form form-delete-card" name="popup-form"  novalidate>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <button type="submit" class="popup__button" >Да</button>
+      </form>
     </div>
-  </template>
+  </div>
 
-</body><!--
-<script type="module" src="./components/dataFile.js"></script>
-<script type="module" src="./pages/index.js"></script>
-
-<script type="module" src="./components/FormValidator.js"></script>
-<script type="module" src="./components/Popup.js"></script>
-<script type="module" src="./components/PopupWithImage.js"></script>
-<script type="module" src="./components/PopupWithForm.js"></script>
-<script type="module" src="./components/Section.js"></script>
-<script type="module" src="./components/UserInfo.js"></script>-->
-
+  <div class="popup popup-avatar">
+    <div class="popup__container popup__container_avatar">
+      <button type="button" class="popup__close-btn popup__close-btn-avatar"></button>
+      <form class="popup__form form-avatar" name="popup-form" novalidate>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <input id = "url-avatar-input" type="url" class="popup__input popup__input_type_link" name="link" placeholder="Введите адрес ссылки." required >
+        <span id = "url-avatar-input-error" class = " ">Не ссылка</span>
+        <button type="submit" class="popup__button">Сохранить</button>
+      </form>
+    </div>
+  </div>
+</body>
 </html>

@@ -3,9 +3,10 @@
 @import url(./__description/card__description.css);
 @import url(./__like-button/card__like-button.css);
 @import url(./__trash-btn/card__trash-btn.css);
+@import url(./__counter/card__counter.css);
+@import url(./__like-container/card__like-container.css);
 
 .card {
-
   max-width: 282px;
   min-height: 360px;
   box-sizing: border-box;
