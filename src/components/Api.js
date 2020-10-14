@@ -9,21 +9,14 @@ export class Api {
     return fetch(`${this._srcUrl}/cards`,{
       headers: this._headers
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+    .then(res => res.ok ? res.json() : Promise.reject( `Ошибка: ${res.status}`));
   }
+
   getUserInfo(){
     return fetch(`${this._srcUrl}/users/me`,{
       headers:this._headers
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+    .then(res => res.ok ? res.json() : Promise.reject( `Ошибка: ${res.status}`));
   }
 
   updateUserInfo(obj){
@@ -36,11 +29,7 @@ export class Api {
       }),
       headers:this._headers
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+    .then(res => res.ok ? res.json() : Promise.reject( `Ошибка: ${res.status}`));
   }
 
   addNewCard(obj){
@@ -52,11 +41,7 @@ export class Api {
       }),
       headers:this._headers
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+    .then(res => res.ok ? res.json() : Promise.reject( `Ошибка: ${res.status}`));
   }
 
   likeCard(id){
@@ -64,11 +49,7 @@ export class Api {
       method: 'PUT',
       headers:this._headers
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+    .then(res => res.ok ? res.json() : Promise.reject( `Ошибка: ${res.status}`));
   }
 
   unLikeCard(id){
@@ -76,11 +57,7 @@ export class Api {
       method: 'DELETE',
       headers:this._headers
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+    .then(res => res.ok ? res.json() : Promise.reject( `Ошибка: ${res.status}`));
   }
 
   deleteCard(id){
@@ -88,11 +65,7 @@ export class Api {
       method: 'DELETE',
       headers:this._headers
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+    .then(res => res.ok ? res.json() : Promise.reject( `Ошибка: ${res.status}`));
   }
 
   updateAvatar(obj){
@@ -103,10 +76,6 @@ export class Api {
       }),
       headers:this._headers
     })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-    });
+    .then(res => res.ok ? res.json() : Promise.reject( `Ошибка: ${res.status}`));
   }
 }

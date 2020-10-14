@@ -18,7 +18,7 @@ const api = new Api({
   },
 });
 
- const myId = '2a813e26a25bb3135a00d9ad';
+
  const cardsSection = document.querySelector('.cards-section');
  const editButton = document.querySelector('.profile__edit-button');
  const formElementProfile = document.querySelector('.popup__form-profile');
@@ -29,21 +29,38 @@ const api = new Api({
  const formElementAvatar = document.querySelector('.form-avatar');
  const editAvatarButton = document.querySelector('.profile__avatar');
  const myAvatar = document.querySelector('.profile__avatar');
-
+ let defaultSection = {};
+ let myId = '';
 const deleteSubmitButton = document.querySelector('.popup-delete-card').querySelector('.popup__button');
 const newCardSubmitButton = document.querySelector('.popup-card').querySelector('.popup__button');
 const profileSubmitButton = document.querySelector('.popup-profile').querySelector('.popup__button');
 const updateAvatarSubmitButton = document.querySelector('.popup-avatar').querySelector('.popup__button');
 
-api
-  .getUserInfo()
-  .then((data) => {
-    myAvatar.style.background = `url('${data.avatar}') 0 0 / 100% 100% no-repeat`;
-    myAvatar.style.backgroundSize = "fit";
+
+  Promise.all([
+    api.getUserInfo(),
+    api.getInitialCards()
+  ])
+  .then(([data, initialCards,]) => {
+    defaultSection = new Section(
+      {
+        data: initialCards.reverse(),
+        renderer: newCard,
+      },
+      cardsSection
+      );
+      defaultSection.renderItems();
+      myId = data._id;
+      userInfo.setUserInfo({
+        name: data.name,
+        job: data.about,
+        avatar: data.avatar,
+        id: data._id,
+     });
+      myAvatar.style.background = `url('${data.avatar}') 0 0 / 100% 100% no-repeat`;
   })
-  .catch((res) => {
-    console.log(res);
-  });
+  .catch(error => console.log(error));
+
 
  function newCard(obj) {
   const card = new Card(
@@ -51,7 +68,6 @@ api
       data: obj,
       handleCardClick: () => {
         popupWithImage.open(obj.link, obj.name);
-        popupWithImage.setEventListeners();
       },
       handleLikeClick: () => {
         if (
@@ -111,25 +127,6 @@ api
 
 }
 
-let defaultSection = {};                          //готовим секции под карточки
-
-  api
-    .getInitialCards()
-    .then((data) => {
-      defaultSection = new Section(
-      {
-        data: data.reverse(),
-        renderer: (item) => {
-        newCard(item);
-        },
-      },
-      cardsSection
-      );
-      defaultSection.renderItems();
-    })
-    .catch((res) => {
-       console.log(res);
-    });
 
 const deletePopup = new PopupDeleteCard(".popup-delete-card", () => {  // попап удаления карточки
   deleteSubmitButton.textContent = "Удаление...";
@@ -158,6 +155,9 @@ const cardPopup = new PopupWithForm(".popup-card", (obj) => {  // попап д�
       newCard(obj);
       cardPopup.close();
     })
+    .catch((res) => {
+      console.log(res);
+   })
     .finally(() => {
         newCardSubmitButton.textContent = "Создать";
     });
@@ -167,24 +167,10 @@ const userInfo = new UserInfo({
   userName: '.profile__name',
   userJob: '.profile__job',
   userAvatar: '.profile__avatar',
-  });
-
-api
-.getUserInfo()
-.then((data) => {
-  userInfo.setUserInfo({
-    name: data.name,
-    job: data.about,
-    avatar: data.avatar,
-  });
-})
-.catch((res) => {
-  console.log(res);
 });
 
 const profilePopup = new PopupWithForm(".popup-profile", (obj) => {  // попап ред. профиля
   profileSubmitButton.textContent = "Сохранение...";
-  debugger;
   console.log(obj);
     api
     .updateUserInfo(obj)
@@ -208,12 +194,15 @@ const avatarPopup = new PopupWithForm(".popup-avatar", (obj) => {   // попа�
 api
   .updateAvatar(obj.link)
   .then(() => {
-    avatarPopup.close();
+    myAvatar.style.background = `url('${obj.link}') 0 0 / 100% 100% no-repeat`;
+    myAvatar.style.backgroundSize = "fit";
+    // avatarPopup.close();
   })
   .catch((res) => {
     console.log(res);
   })
   .finally(() => {
+    avatarPopup.close();
     updateAvatarSubmitButton.textContent = "Сохранить";
   });
   myAvatar.style.background = `url('${obj.link}') 0 0 / 100% 100% no-repeat`;
@@ -225,6 +214,7 @@ cardPopup.setEventListeners();
 profilePopup.setEventListeners();
 avatarPopup.setEventListeners();
 deletePopup.setEventListeners();
+popupWithImage.setEventListeners();
 
 // - ВАЛИДАЦИЯ - //
 const editFormProfile = new FormValidator(formObj, formElementProfile);
@@ -236,22 +226,28 @@ editFormAvatar.enableValidation();
 
  //-- СЛУШАТЕЛИ  кнопок --//
 editButton.addEventListener("click", () => {
-  profilePopup.open();
-  profileNameInput.value = userInfo.getUserInfo().userName;
-  profileJobInput.value = userInfo.getUserInfo().userJob;
-  editFormProfile.validate();
+  const actualUserProfile = userInfo.getUserInfo();
+  profileNameInput.value = actualUserProfile.userName;
+  profileJobInput.value = actualUserProfile.userJob;
   editFormProfile.clearInputErrors();
+  profilePopup.open();
+  editFormProfile.validate();
 });
 addButton.addEventListener('click', () => {
-  cardPopup.open();
   editFormCard.clearInputErrors();
+  cardPopup.open();
   editFormCard.validate();
+
 });
 editAvatarButton.addEventListener("click", () => {
-  document.querySelector('.popup-avatar').querySelector('.popup__button').textContent = 'Сохранить';
+  updateAvatarSubmitButton.textContent = 'Сохранить';
+  editFormAvatar.clearInputErrors();
   avatarPopup.open();
   editFormAvatar.validate();
-  editFormAvatar.clearInputErrors();
 });
+
+
+
+
 
 
