@@ -57,7 +57,6 @@ const updateAvatarSubmitButton = document.querySelector('.popup-avatar').querySe
         avatar: data.avatar,
         id: data._id,
      });
-      myAvatar.style.background = `url('${data.avatar}') 0 0 / 100% 100% no-repeat`;
   })
   .catch(error => console.log(error));
 
@@ -178,6 +177,7 @@ const profilePopup = new PopupWithForm(".popup-profile", (obj) => {  // попа
       userInfo.setUserInfo({
         name: obj.name,
         job: obj.about,
+        avatar: obj.avatar,
       });
       profilePopup.close();
     })
@@ -196,17 +196,14 @@ api
   .then(() => {
     myAvatar.style.background = `url('${obj.link}') 0 0 / 100% 100% no-repeat`;
     myAvatar.style.backgroundSize = "fit";
-    // avatarPopup.close();
+    avatarPopup.close();
   })
   .catch((res) => {
     console.log(res);
   })
   .finally(() => {
-    avatarPopup.close();
     updateAvatarSubmitButton.textContent = "Сохранить";
   });
-  myAvatar.style.background = `url('${obj.link}') 0 0 / 100% 100% no-repeat`;
-  myAvatar.style.backgroundSize = "fit";
 });
 
 // - СЛУШАТЕЛИ попапов - //
@@ -230,20 +227,20 @@ editButton.addEventListener("click", () => {
   profileNameInput.value = actualUserProfile.userName;
   profileJobInput.value = actualUserProfile.userJob;
   editFormProfile.clearInputErrors();
-  profilePopup.open();
   editFormProfile.validate();
+  profilePopup.open();
 });
 addButton.addEventListener('click', () => {
   editFormCard.clearInputErrors();
-  cardPopup.open();
   editFormCard.validate();
+  cardPopup.open();
 
 });
 editAvatarButton.addEventListener("click", () => {
   updateAvatarSubmitButton.textContent = 'Сохранить';
   editFormAvatar.clearInputErrors();
-  avatarPopup.open();
   editFormAvatar.validate();
+  avatarPopup.open();
 });
 
 
