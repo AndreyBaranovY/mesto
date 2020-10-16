@@ -28,7 +28,6 @@ const api = new Api({
  const formElementCard = document.querySelector('.popup__form-card');
  const formElementAvatar = document.querySelector('.form-avatar');
  const editAvatarButton = document.querySelector('.profile__avatar');
- const myAvatar = document.querySelector('.profile__avatar');
  let defaultSection = {};
  let myId = '';
 const deleteSubmitButton = document.querySelector('.popup-delete-card').querySelector('.popup__button');
@@ -194,8 +193,9 @@ const avatarPopup = new PopupWithForm(".popup-avatar", (obj) => {   // попа�
 api
   .updateAvatar(obj.link)
   .then(() => {
-    myAvatar.style.background = `url('${obj.link}') 0 0 / 100% 100% no-repeat`;
-    myAvatar.style.backgroundSize = "fit";
+    userInfo.updateMyAvatar({
+      avatar: obj.link,
+    });
     avatarPopup.close();
   })
   .catch((res) => {
