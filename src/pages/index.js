@@ -53,9 +53,11 @@ const updateAvatarSubmitButton = document.querySelector('.popup-avatar').querySe
       userInfo.setUserInfo({
         name: data.name,
         job: data.about,
-        avatar: data.avatar,
         id: data._id,
      });
+     userInfo.updateMyAvatar({
+      avatar: data.avatar,
+    });
   })
   .catch(error => console.log(error));
 
@@ -176,10 +178,10 @@ const profilePopup = new PopupWithForm(".popup-profile", (obj) => {  // попа
       userInfo.setUserInfo({
         name: obj.name,
         job: obj.about,
-        avatar: obj.avatar,
       });
       profilePopup.close();
     })
+
     .catch((res) => {
       console.log(res);
     })
